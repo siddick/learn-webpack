@@ -18,6 +18,7 @@ Please complete [step-01](../../tree/step-01) and follow below steps to intergra
 3. Create webpack configuration file(`webpack.config.js`)
 
     ```js
+    var HtmlWebpackPlugin = require('html-webpack-plugin');
     module.exports = {
         entry: {
             app: ['./app.scss', './app.js']
