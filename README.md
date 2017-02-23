@@ -41,3 +41,5 @@ Create empty project directory and follow below steps.
 	```sh
 	./node_modules/.bin/webpack -p
 	```
+
+You are completed successfully. Continue to next step: [step-02](../../tree/step-02)
