@@ -1,24 +1,20 @@
-Compile stylesheet with WebPack
--------------------------------
+Split stylesheet and javascript with WebPack
+--------------------------------------------
 
-Please complete [step-01](../../tree/step-01) and follow below steps to intergrate stylesheet.
+Please complete [step-02](../../tree/step-02) and follow below steps to intergrate stylesheet.
 
 1. Install node packages
 
     ```sh
-    npm install style-loader css-loader url-loader file-loader --save
-    npm install sass-loader node-sass --save
-    npm install bootstrap --save
+    npm install extract-text-webpack-plugin@beta --save
     ```
-2. Create stylesheet file(`app.scss`)
-
-    ```css
-    @import "~bootstrap/dist/css/bootstrap.css";
-    ```
-3. Create webpack configuration file(`webpack.config.js`)
+2. Create webpack configuration file(`webpack.config.js`)
 
     ```js
-    var HtmlWebpackPlugin = require('html-webpack-plugin');
+    var HtmlWebpackPlugin = require('html-webpack-plugin'),
+        ExtractTextWebpackPlugin = require('extract-text-webpack-plugin'),
+        appCss = new ExtractTextWebpackPlugin('app.css');
+
     module.exports = {
         entry: {
             app: ['./app.scss', './app.js']
@@ -29,12 +25,22 @@ Please complete [step-01](../../tree/step-01) and follow below steps to intergra
         },
         module: {
             loaders: [
-                { test: /\.s?css$/, loader: 'style-loader!css-loader!sass-loader' },
-                { test: /\.(svg|ttf|eot|woff2?)$/, loader: 'url-loader?limit=8192' }
+                {
+                    test: /\.s?css$/,
+                    loader: appCss.extract({
+                        fallback: 'style-loader',
+                        use: 'css-loader!sass-loader'
+                    })
+                },
+                {
+                    test: /\.(svg|ttf|eot|woff2?)$/,
+                    loader: 'url-loader?limit=8192'
+                }
             ]
         },
         plugins: [
-            new HtmlWebpackPlugin()
+            new HtmlWebpackPlugin(),
+            appCss
         ]
     };
     ```
@@ -49,4 +55,4 @@ Please complete [step-01](../../tree/step-01) and follow below steps to intergra
     ./node_modules/.bin/webpack -p
     ```
 
-You completed successfully. Continue to next step: [step-03](../../tree/step-03)
+You completed successfully. Continue to next step: [step-04](../../tree/step-04)

@@ -1,4 +1,7 @@
-var HtmlWebpackPlugin = require('html-webpack-plugin');
+var HtmlWebpackPlugin = require('html-webpack-plugin'),
+    ExtractTextWebpackPlugin = require('extract-text-webpack-plugin'),
+    appCss = new ExtractTextWebpackPlugin('app.css');
+
 module.exports = {
     entry: {
         app: ['./app.scss', './app.js']
@@ -9,11 +12,21 @@ module.exports = {
     },
     module: {
         loaders: [
-            { test: /\.s?css$/, loader: 'style-loader!css-loader!sass-loader' },
-            { test: /\.(svg|ttf|eot|woff2?)$/, loader: 'url-loader?limit=8192' }
+            {
+                test: /\.s?css$/,
+                loader: appCss.extract({
+                    fallback: 'style-loader',
+                    use: 'css-loader!sass-loader'
+                })
+            },
+            {
+                test: /\.(svg|ttf|eot|woff2?)$/,
+                loader: 'url-loader?limit=8192'
+            }
         ]
     },
     plugins: [
-        new HtmlWebpackPlugin()
+        new HtmlWebpackPlugin(),
+        appCss
     ]
 };
