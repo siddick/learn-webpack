@@ -1,43 +1,49 @@
-Steps to create simple webpack project
---------------------------------------
+Compile stylesheet with WebPack
+-------------------------------
 
-Create empty project directory and follow below steps.
+Please complete [step-01](step-01) and follow below steps to intergrate stylesheet.
 
 1. Install node packages
 
-	```sh
-	npm init --yes
-	npm install webpack webpack-dev-server html-webpack-plugin --save
-	npm install jquery --save
-	```
-2. Create javascript file(`app.js`)
+    ```sh
+    npm install style-loader css-loader url-loader file-loader --save
+    npm install sass-loader node-sass --save
+    npm install bootstrap --save
+    ```
+2. Create stylesheet file(`app.scss`)
 
-	```js
-	var $ = require('jquery');
-	$('body').append('<h1>Hello World!</h1>');
-	```
+    ```css
+    @import "~bootstrap/dist/css/bootstrap.css";
+    ```
 3. Create webpack configuration file(`webpack.config.js`)
 
-	```js
-	var HtmlWebpackPlugin = require('html-webpack-plugin');
-	module.exports = {
-		entry: './app.js',
-		output: {
-			path: (__dirname + '/public'),
-			filename: 'app.js'
-		},
-		plugins: [
-			new HtmlWebpackPlugin()
-		]
-	};
-	```
+    ```js
+    module.exports = {
+        entry: {
+            app: ['./app.scss', './app.js']
+        },
+        output: {
+            path: (__dirname + '/public'),
+            filename: '[name].js'
+        },
+        module: {
+            loaders: [
+                { test: /\.s?css$/, loader: 'style-loader!css-loader!sass-loader' },
+                { test: /\.(svg|ttf|eot|woff2?)$/, loader: 'url-loader?limit=8192' }
+            ]
+        },
+        plugins: [
+            new HtmlWebpackPlugin()
+        ]
+    };
+    ```
 4. Start dev server to view application(http://localhost:8080/)
 
-	```sh
-	./node_modules/.bin/webpack-dev-server --open --inline
-	```
+    ```sh
+    ./node_modules/.bin/webpack-dev-server --open --inline
+    ```
 5. Build code for production
 
-	```sh
-	./node_modules/.bin/webpack -p
-	```
+    ```sh
+    ./node_modules/.bin/webpack -p
+    ```
