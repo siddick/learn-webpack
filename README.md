@@ -1,7 +1,7 @@
 Compile stylesheet with WebPack
 -------------------------------
 
-Please complete [step-01](step-01) and follow below steps to intergrate stylesheet.
+Please complete [step-01](../../tree/step-01) and follow below steps to intergrate stylesheet.
 
 1. Install node packages
 
@@ -47,3 +47,5 @@ Please complete [step-01](step-01) and follow below steps to intergrate styleshe
     ```sh
     ./node_modules/.bin/webpack -p
     ```
+
+You completed successfully. Continue to next step: [step-03](../../tree/step-03)
