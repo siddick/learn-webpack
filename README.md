@@ -1,3 +1,7 @@
+Steps to create simple webpack project
+--------------------------------------
+
+Create empty project directory and follow below steps.
 
 1. Install node packages
 
