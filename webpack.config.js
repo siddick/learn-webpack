@@ -13,6 +13,10 @@ module.exports = {
     module: {
         loaders: [
             {
+                test: /\.jsx?$/,
+                loader: 'babel-loader'
+            },
+            {
                 test: /\.s?css$/,
                 loader: appCss.extract({
                     fallback: 'style-loader',

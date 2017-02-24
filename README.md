@@ -1,58 +1,54 @@
-Split stylesheet and javascript with WebPack
---------------------------------------------
+Compile jsx and ES6 syntax
+--------------------------
 
-Please complete [step-02](../../tree/step-02) and follow below steps to intergrate stylesheet.
+Please complete [step-03](../../tree/step-03) and follow below steps to intergrate stylesheet.
 
 1. Install node packages
 
     ```sh
-    npm install extract-text-webpack-plugin@beta --save
+    npm install babel-loader babel-core babel-preset-env babel-preset-react --save
+    npm install react react-dom --save
     ```
-2. Create webpack configuration file(`webpack.config.js`)
+2. Update webpack configuration(`webpack.config.js`) to support babel loader
 
     ```js
-    var HtmlWebpackPlugin = require('html-webpack-plugin'),
-        ExtractTextWebpackPlugin = require('extract-text-webpack-plugin'),
-        appCss = new ExtractTextWebpackPlugin('app.css');
-
-    module.exports = {
-        entry: {
-            app: ['./app.scss', './app.js']
-        },
-        output: {
-            path: (__dirname + '/public'),
-            filename: '[name].js'
-        },
-        module: {
-            loaders: [
-                {
-                    test: /\.s?css$/,
-                    loader: appCss.extract({
-                        fallback: 'style-loader',
-                        use: 'css-loader!sass-loader'
-                    })
-                },
-                {
-                    test: /\.(svg|ttf|eot|woff2?)$/,
-                    loader: 'url-loader?limit=8192'
-                }
-            ]
-        },
-        plugins: [
-            new HtmlWebpackPlugin(),
-            appCss
-        ]
-    };
+    {
+        test: /\.jsx?$/,
+        loader: 'babel-loader'
+    }
     ```
-4. Start dev server to view application(http://localhost:8080/)
+3. Add babel configuration(`.babelrc`)
+
+    ```json
+    {
+        "presets": ["env", "react"]
+    }
+    ```
+4. Update javascript file(`app.js`) with Reactjs syntax
+
+    ```js
+    var React = require('react'),
+        ReactDOM = require('react-dom'),
+        container = document.createElement('div');
+    
+    document.body.appendChild(container);
+    
+    ReactDOM.render(
+        <div className="container">
+            <h1>Hello World!</h1>
+        </div>,
+        container
+    );
+    ```
+5. Start dev server to view application(http://localhost:8080/)
 
     ```sh
     ./node_modules/.bin/webpack-dev-server --open --inline
     ```
-5. Build code for production
+6. Build code for production
 
     ```sh
     ./node_modules/.bin/webpack -p
     ```
 
-You completed successfully. Continue to next step: [step-04](../../tree/step-04)
+You completed successfully. Continue to next step: [step-05](../../tree/step-05)
