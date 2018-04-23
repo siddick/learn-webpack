@@ -4,7 +4,7 @@ var HtmlWebpackPlugin = require('html-webpack-plugin'),
 
 module.exports = {
     entry: {
-        app: ['./app.scss', './app.js']
+        app: ['./src/css/app.scss', './src/js/app.js']
     },
     output: {
         path: (__dirname + '/public'),
