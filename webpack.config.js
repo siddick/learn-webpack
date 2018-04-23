@@ -35,5 +35,10 @@ module.exports = {
             filename: 'index.html'
         }),
         appCss
-    ]
+    ],
+    devServer: {
+        proxy: {
+            '/__': 'http://localhost:5000'
+        }
+    }
 };
