@@ -5,8 +5,10 @@
   "main": "index.js",
   "scripts": {
     "build": "webpack -p",
-    "start": "webpack-dev-server --open --inline",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "clean": "rm public/* -rv || exit 0",
+    "start": "webpack-dev-server --open --inline && fg",
+    "deploy": "npm run clean && npm run build && npm run deploy-only",
+    "deploy-only": "firebase deploy"
   },
   "keywords": [],
   "author": "",

@@ -30,7 +30,10 @@ module.exports = {
         ]
     },
     plugins: [
-        new HtmlWebpackPlugin(),
+        new HtmlWebpackPlugin({
+            template: './src/index.html',
+            filename: 'index.html'
+        }),
         appCss
     ]
 };

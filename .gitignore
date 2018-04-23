@@ -3,3 +3,5 @@ yarn.lock
 .build
 public
 package-lock.json
+*.log
+.firebaserc
