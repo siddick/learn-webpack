@@ -1,12 +1,8 @@
 var React = require('react'),
     ReactDOM = require('react-dom'),
-    container = document.createElement('div');
-
-document.body.appendChild(container);
+    container = document.getElementById('content');
 
 ReactDOM.render(
-    <div className="container">
-        <h1>Hello World!</h1>
-    </div>,
+    <h1>Hello World!</h1>,
     container
 );
